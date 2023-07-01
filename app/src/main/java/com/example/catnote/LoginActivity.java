@@ -1,24 +1,17 @@
 package com.example.catnote;
 
-import static javax.crypto.Cipher.DECRYPT_MODE;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
-
-import android.content.Intent;
-import android.hardware.biometrics.BiometricPrompt;
-import android.os.Bundle;
-import android.security.keystore.KeyGenParameterSpec;
-import android.security.keystore.KeyProperties;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.catnote.data.DBCatNote;
 import com.example.catnote.models.CryptographyManager;
@@ -27,30 +20,24 @@ import com.example.catnote.models.User;
 import com.example.catnote.test.Login;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -79,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity);
         this.user = dbCatNote.getUser("popka");
         executor = ContextCompat.getMainExecutor(this);
-        biometricPrompt = new BiometrxicPrompt(LoginActivity.this,
+        biometricPrompt = new BiometricPrompt(LoginActivity.this,
                 executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode,
